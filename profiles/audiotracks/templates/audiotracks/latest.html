@@ -1,0 +1,17 @@
+{% extends "audiotracks/mediaelement_base.html" %}
+{% load i18n %}
+
+{% block body %}
+<h1>{% trans 'Latest Tracks' %}</h1>
+
+<a href="{% url 'm3u' %}">m3u playlist</a>
+<ul class="audiotracks-list">
+{% for track in tracks %}
+    {% include "audiotracks/listing_item.html" %}
+{% endfor %}
+</ul>
+
+{% include '_pagination.html' %}
+
+{% endblock %}
+ 

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}{{ block.super }}<link href="{% static 'mediaelement-2.8.2/mediaelementplayer.min.css' %}" rel="stylesheet">{% endblock %}
+
+{% block extra_body %}{{ block.super}}
+<script>window.jQuery || document.write('<script src="{% static 'mediaelement-2.8.2/jquery-1.7.2.min.js' %}<\/script>')</script>
+<script src="{% static 'mediaelement-2.8.2/mediaelement-and-player.min.js' %}</script>
+<script src="{% static 'mediaelement-2.8.2/player_script' %}"></script>
+{% endblock %}
