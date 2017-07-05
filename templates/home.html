@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+  {% load i18n %}
+{% block title %}{{ block.super }} | Welcome{% endblock title %}
+{% load staticfiles %}
+
+
+{% block body %}
+ 
+<div class='row'>
+<div class='col-sm-12'>
+<h3>{% trans 'Latest Tracks' %}</h3>
+<ul class="audiotracks-list">
+ {% for track in tracks %}
+   <div class="audiotracks-list-entry js-audiotracks-container">
+    {% if track.image %}
+    <img class="track-image" src="{{ track.image.url_48x48 }}" alt="{% trans 'Track Image' %}" />
+    {% endif %}
+    <div class="track-details">
+      <a href="{% url 'track_detail' username=track.user.username track_slug=track.slug %}">
+        <p class="track-title js-audiotracks-title">
+        {% if track.artist %} {{ track.artist }} &#8211; {% endif %}{{ track.title|title }}{% if track.genre %} ({{ track.genre }}){% endif %}
+        </p>
+      </a>
+    </div>
+    <div class="player-container">
+
+	   
+        <source src="{{ track.audio_file.url }}" type="{{ track.mimetype }}">
+		
+     
+    </div>
+   {% endfor %}    
+</ul>
+ <h1>{{ title }}</h1>
+
+{% for obj in object_list %}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="thumbnail">
+        {% if obj.image %}
+         <img src='{{ obj.image.url }}' class='img-responsive' />
+        {% endif %}
+      <div class="caption">
+        <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.timestamp|timesince }} ago</small></h3>
+        <p>{{ obj.content|linebreaks|truncatechars:120 }}</p>
+        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
+      </div>
+    </div>
+  </div>
+<hr/>
+</div>
+{% endfor %}
+{% endblock %}

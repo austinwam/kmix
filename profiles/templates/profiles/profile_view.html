@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+
+{% block body %}
+
+
+<h3>{{ profile.user }}</h3>
+ 
+<div class='col-sm-2'>
+{% if profile.picture %}
+<img src='{{ profile.picture.url }}' class='img-responsive'/>
+{% else %}
+
+<img src='{% static "img/profile_default.jpg" %}' class='img-responsive' />
+
+{% endif %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+
+{% block body %}
+
+
+<h3>{{ profile.name }}</h3>
+
+<div class='col-sm-4'>
+{% if profile.picture %}
+<img src='{{ profile.picture.url }}' class='img-responsive'/>
+{% else %}
+
+<img src='{% static "img/profile_default.jpg" %}' class='img-responsive' />
+
+{% endif %}
+</div>
+<div class="row">
+    <div class="span9">
+<h3>bio</h3>
+<div class="span7">
+{{ profile.bio }}
+<h4>music</h4>
+ {{ profile.user.tracks }}
+<blockquote><p><li><a href="{% url 'profile_edit' %}">Edit your profile</a>.</li></p></blockquote>
+ <li><a href="{% url 'user_index' user.username %}">{% trans 'Your tracks' %}</a></li>
+ 
+</div>
+
+</div>
+</div>
+</div>
+
+{% endblock %}
